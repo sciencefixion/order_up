@@ -22,4 +22,23 @@ RSpec.describe "Dish show page" do
     expect(page).to have_content(chef.name)
 
   end
+
+  #   As a visitor
+  # When I visit a dish's show page
+  # I see the total calorie count for that dish.
+  it "shows total_calories for the dish" do
+    chef = Chef.create(name: "Pierre Escargots")
+    dish = chef.dishes.create(name: "Windy City Dog", description: "Make me one with everything!")
+    bun = Ingredient.create(name: "bun", calories: 100)
+    dog = Ingredient.create(name: "kosher hot dog", calories: 150)
+
+    DishIngredient.create(dish: dish, ingredient: bun)
+    DishIngredient.create(dish: dish, ingredient: dog)
+
+    visit "/dishes/#{dish.id}"
+
+    expect(page).to have_content(250)
+  end
+
+  
 end
