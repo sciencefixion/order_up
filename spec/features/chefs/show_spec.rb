@@ -19,11 +19,11 @@ RSpec.describe "Chef show page" do
     DishIngredient.create(dish: dish, ingredient: dog)
 
     visit "/chefs/#{chef.id}"
-
     expect(page).to have_content(chef.name)
     expect(page).to have_link("All Ingredients")
 
     click_on "All Ingredients"
+    # save_and_open_page
 
     expect(current_path).to eq("/chefs/#{chef.id}/ingredients")
 
